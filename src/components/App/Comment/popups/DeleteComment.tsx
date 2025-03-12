@@ -9,10 +9,6 @@ import DialogHeading from "../../../Dialog/DialogHeading";
 import DialogDescription from "../../../Dialog/DialogDescription";
 import DialogClose from "../../../Dialog/DialogClose";
 
-import EditIcon from "../icons/pencil.svg";
-import ConfirmEditIcon from "../icons/check.svg";
-import DiscardEditIcon from "../icons/pencil-off.svg";
-
 import DeleteIcon from "../icons/trash-2.svg";
 
 import styles from "./popups.module.css";
