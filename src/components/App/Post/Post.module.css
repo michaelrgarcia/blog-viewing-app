@@ -1,0 +1,185 @@
+.post {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  border: 1px solid #c2c8d0;
+  border-radius: 8px;
+  padding: 20px;
+
+  min-height: 400px;
+}
+
+.postBlur {
+  composes: post;
+
+  position: relative;
+
+  filter: blur(2px);
+}
+
+.loadingText {
+  position: absolute;
+  z-index: 1;
+
+  margin-left: 45px;
+  margin-top: 170px;
+
+  font-weight: bold;
+  font-size: 3em;
+
+  user-select: none;
+
+  animation-name: waver;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+.postInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  border-bottom: 1px solid #c2c8d0;
+
+  width: 100%;
+}
+
+.postTitle {
+  font-weight: bold;
+  font-size: 1.6em;
+
+  margin-top: 5px;
+}
+
+.postAuthor {
+  margin-top: -10px;
+}
+
+.postedBy {
+  margin-top: -5px;
+}
+
+.postDatesContainer {
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+}
+
+.postedBy,
+.postDates {
+  font-size: 0.85em;
+
+  color: hsl(0, 0%, 63%, 1);
+}
+
+.postDates,
+.postActions {
+  margin-top: 5px;
+}
+
+.postActions {
+  display: flex;
+  gap: 10px;
+}
+
+.postActions > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px;
+  border: 1px solid #c2c8d0;
+
+  background-color: inherit;
+
+  width: 40px;
+}
+
+.postActions > button:hover,
+.dialogActions > button:hover {
+  border-color: #6b6fc9;
+}
+
+.postActions > button > img {
+  width: 20px;
+
+  filter: invert(62%) sepia(17%) saturate(197%) hue-rotate(176deg)
+    brightness(89%) contrast(84%);
+}
+
+.postContent {
+  margin-top: 30px;
+}
+
+.newTitleInput {
+  margin-left: 0;
+  margin-top: 8px;
+  margin-bottom: 30px;
+}
+
+.newContentTextarea {
+  font-family: ui-sans-serif, system-ui, sans-serif, Apple Color Emoji,
+    Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size: 0.9em;
+
+  margin-top: 35px;
+  border: 1px solid #c2c8d0;
+  border-radius: 8px;
+  padding: 8px 10px;
+
+  background-color: inherit;
+
+  max-width: 100%;
+  box-sizing: border-box;
+
+  transition: border-color 0.25s;
+
+  resize: none;
+}
+
+.newContentTextarea:hover {
+  border-color: #000000;
+}
+
+.postCommentsHeader {
+  font-weight: bold;
+  font-size: 1.2em;
+
+  margin-bottom: 15px;
+}
+
+.postComments {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  width: 100%;
+}
+
+@keyframes waver {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@media only screen and (min-width: 950px) {
+  .postDatesContainer {
+    flex-direction: row;
+    width: 100%;
+
+    justify-content: space-between;
+  }
+
+  .loadingText {
+    margin-left: 230px;
+    margin-top: 150px;
+
+    font-size: 4em;
+  }
+}
