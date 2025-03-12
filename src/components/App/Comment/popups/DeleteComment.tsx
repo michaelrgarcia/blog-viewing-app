@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 
 import { useAuth } from "../../../../context/AuthProvider";
-import { usePostContext } from "../../../../context/PostContextProvider";
 import { Dialog } from "../../../../context/DialogProvider";
 
 import DialogTrigger from "../../../Dialog/DialogTrigger";
@@ -16,12 +15,19 @@ import styles from "./popups.module.css";
 
 type DeleteCommentProps = {
   id: number;
+  loading: boolean;
+  updatePosts: () => void;
+  setError: Dispatch<SetStateAction<string>>;
+  setLoading: Dispatch<SetStateAction<boolean>>;
 };
 
-function DeleteComment({ id }: DeleteCommentProps) {
-    const { loading, setLoading, setError, updatePosts } =
-    usePostContext();
-
+function DeleteComment({
+  id,
+  loading,
+  updatePosts,
+  setError,
+  setLoading,
+}: DeleteCommentProps) {
   const { user } = useAuth();
 
   const onConfirmDelete = async () => {

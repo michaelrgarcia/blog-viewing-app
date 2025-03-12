@@ -142,8 +142,10 @@ function Comment({
             </button>
             <DeleteComment
               id={Number(id)}
+              loading={loading}
               updatePosts={updatePosts}
               setError={setError}
+              setLoading={setLoading}
             />
           </div>
         ) : (
@@ -163,6 +165,7 @@ function Comment({
       ) : (
         <p className={styles.commentContent}>{content}</p>
       )}
+      {loading && <p>Loading...</p>}
       {error && <p style={{ color: "red", marginTop: 0 }}>{error}</p>}
     </div>
   );
