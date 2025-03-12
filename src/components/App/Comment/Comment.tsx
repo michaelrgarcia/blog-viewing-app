@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { formatDistanceToNow } from "date-fns";
 
 import { useAuth } from "../../../context/AuthProvider";
 
 import { getDateFromDbString } from "../../../utils/dateHelpers";
+import { getParsedJwt } from "../../../utils/jwtHelpers";
 
 import CommentType from "../../../types/comment";
 
@@ -36,6 +37,8 @@ function Comment({
 
   const { user } = useAuth();
 
+  const parsedUser = getParsedJwt(user);
+
   const uploadTimeFromNow = formatDistanceToNow(getDateFromDbString(uploaded), {
     addSuffix: true,
   });
@@ -52,6 +55,12 @@ function Comment({
     getDateFromDbString(lastModified).getTime()
       ? `${uploadTimeFromNow}`
       : `${uploadTimeFromNow} • updated ${editTimeFromNow}`;
+
+  const onContentUpdate = (e: FormEvent<HTMLTextAreaElement>) => {
+    if (!loading) {
+      setEditFields({ content: e.currentTarget.value });
+    }
+  };
 
   const onEditConfirm = async () => {
     const changesMade = editFields.content !== content;
@@ -122,7 +131,7 @@ function Comment({
               <img src={DiscardEditIcon} alt="Stop Editing" />
             </button>
           </div>
-        ) : (
+        ) : parsedUser?.username === author.username ? (
           <div className={styles.commentActions}>
             <button
               type="button"
@@ -137,9 +146,23 @@ function Comment({
               setError={setError}
             />
           </div>
+        ) : (
+          ""
         )}
       </div>
-      <p className={styles.commentContent}>{content}</p>
+      {editing ? (
+        <textarea
+          name="newContent"
+          id="newContent"
+          className={styles.newContentTextarea}
+          cols={120}
+          rows={10}
+          value={editFields.content}
+          onChange={onContentUpdate}
+        ></textarea>
+      ) : (
+        <p className={styles.commentContent}>{content}</p>
+      )}
       {error && <p style={{ color: "red", marginTop: 0 }}>{error}</p>}
     </div>
   );
