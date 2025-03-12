@@ -1,35 +1,92 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+
+import { useAuth } from "../../context/AuthProvider";
+import { PostContextProvider } from "../../context/PostContextProvider";
+
+import PostType from "../../types/post";
+
+import Post from "./Post/Post";
+
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [posts, setPosts] = useState<PostType[] | []>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+  const [refresh, setRefresh] = useState<boolean>(false);
+
+  const { user } = useAuth();
+
+  const onPostsUpdate = () => {
+    setRefresh(!refresh);
+  };
+
+  useEffect(() => {
+    async function request() {
+      try {
+        setPosts([]);
+
+        setLoading(true);
+
+        const endpoint = import.meta.env.VITE_MY_BLOG_API;
+
+        const res = await fetch(`${endpoint}/posts/published`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user}`,
+          },
+        });
+
+        const parsed = await res.json();
+
+        setPosts(parsed);
+      } catch (err: unknown) {
+        setError(String(err));
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    request();
+  }, [user, refresh]);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <header>
+        <h1>My Fake Blog</h1>
+      </header>
+      <main>
+        {loading && <p>Loading posts...</p>}
+        {!loading && error ? <p>Error getting posts. Please refresh.</p> : ""}
+        {posts.map(
+          ({
+            id,
+            title,
+            author,
+            content,
+            uploaded,
+            lastModified,
+            comments,
+          }) => (
+            <PostContextProvider
+              postId={id}
+              updatePosts={onPostsUpdate}
+              key={`post-${id}`}
+            >
+              <Post
+                title={title}
+                author={author}
+                content={content}
+                uploaded={uploaded}
+                lastModified={lastModified}
+                comments={comments}
+              />
+            </PostContextProvider>
+          )
+        )}
+      </main>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
