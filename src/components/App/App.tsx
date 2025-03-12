@@ -7,7 +7,7 @@ import PostType from "../../types/post";
 
 import Post from "./Post/Post";
 
-import "./App.css";
+import styles from "./App.module.css";
 
 function App() {
   const [posts, setPosts] = useState<PostType[] | []>([]);
@@ -15,7 +15,7 @@ function App() {
   const [error, setError] = useState<string>("");
   const [refresh, setRefresh] = useState<boolean>(false);
 
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
 
   const onPostsUpdate = () => {
     setRefresh(!refresh);
@@ -52,8 +52,11 @@ function App() {
 
   return (
     <>
-      <header>
+      <header className={styles.appHeader}>
         <h1>My Fake Blog</h1>
+        <button type="button" onClick={() => logout()}>
+          {user ? "Log out" : "Log in"}
+        </button>
       </header>
       <main>
         {loading && <p>Loading posts...</p>}

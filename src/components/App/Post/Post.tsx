@@ -140,7 +140,7 @@ function Post({
           </>
         ) : (
           <p>
-            You must <Link to="login">log in</Link> to create a comment.
+            You must <Link to="/login">log in</Link> to create a comment.
           </p>
         )}
         <div className={styles.postComments}>
