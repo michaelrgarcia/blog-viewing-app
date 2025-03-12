@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { useAuth } from "../../context/AuthProvider";
 import { PostContextProvider } from "../../context/PostContextProvider";
@@ -16,6 +17,7 @@ function App() {
   const [refresh, setRefresh] = useState<boolean>(false);
 
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const onPostsUpdate = () => {
     setRefresh(!refresh);
@@ -54,7 +56,10 @@ function App() {
     <>
       <header className={styles.appHeader}>
         <h1>My Fake Blog</h1>
-        <button type="button" onClick={() => logout()}>
+        <button
+          type="button"
+          onClick={user ? () => logout() : () => navigate("/login")}
+        >
           {user ? "Log out" : "Log in"}
         </button>
       </header>
