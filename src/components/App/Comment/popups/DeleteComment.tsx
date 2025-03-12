@@ -21,7 +21,7 @@ type DeleteCommentProps = {
 };
 
 function DeleteComment({ id, updatePosts, setError }: DeleteCommentProps) {
-    const { postId, loading, setLoading, updatePosts, setError } =
+    const { loading, setLoading } =
     usePostContext();
 
   const { user } = useAuth();
