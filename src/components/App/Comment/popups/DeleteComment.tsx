@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useState } from "react";
 
 import { useAuth } from "../../../../context/AuthProvider";
+import { usePostContext } from "../../../../../../context/PostContextProvider";
 import { Dialog } from "../../../../context/DialogProvider";
 
 import DialogTrigger from "../../../Dialog/DialogTrigger";
@@ -20,7 +21,8 @@ type DeleteCommentProps = {
 };
 
 function DeleteComment({ id, updatePosts, setError }: DeleteCommentProps) {
-  const [loading, setLoading] = useState<boolean>(false);
+    const { postId, loading, setLoading, updatePosts, setError } =
+    usePostContext();
 
   const { user } = useAuth();
 
