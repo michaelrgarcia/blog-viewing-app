@@ -28,13 +28,27 @@
   gap: 5px;
 }
 
+.commentAuthor {
+  max-width: 220px;
+  overflow: auto;
+}
+
 .commentTimestamp {
   color: hsl(0, 0%, 63%, 1);
 
   font-size: 0.8em;
 }
 
-.commentAuthorContainer > button {
+.commentActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  margin-top: 5px;
+  padding-right: 5px;
+}
+
+.commentActions > button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -45,26 +59,20 @@
 
   background-color: inherit;
 
-  width: 30px;
+  width: 35px;
 }
 
-.commentAuthorContainer > button > img {
+.commentActions > button > img {
   width: 20px;
 
   filter: invert(62%) sepia(17%) saturate(197%) hue-rotate(176deg)
     brightness(89%) contrast(84%);
 }
 
-.commentAuthorContainer > button:hover {
+.commentActions > button:hover {
   border-color: #6b6fc9;
 }
 
 .commentContent {
   margin-top: 0;
-}
-
-.commentActions {
-  display: flex;
-  gap: 10px;
-  margin-top: 5px;
 }

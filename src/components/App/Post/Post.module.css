@@ -7,7 +7,7 @@
   border-radius: 8px;
   padding: 20px;
 
-  min-height: 400px;
+  min-height: 600px;
 }
 
 .postBlur {
@@ -157,6 +157,32 @@
   gap: 20px;
 
   width: 100%;
+
+  margin-top: 40px;
+}
+
+.commentContentTextarea {
+  min-height: 200px;
+}
+
+.submitComment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px;
+  border: 1px solid #c2c8d0;
+  margin-top: 20px;
+
+  transition: opacity 0.25s;
+
+  background-color: inherit;
+
+  width: 130px;
+}
+
+.submitComment:hover {
+  border-color: #6b6fc9;
 }
 
 @keyframes waver {
