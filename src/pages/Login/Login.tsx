@@ -7,6 +7,7 @@ import Form from "../../components/Form/Form";
 import { InputProps } from "../../components/Form/FormComponents/Inputs/InputProps";
 
 import "./Login.module.css";
+import { Link } from "react-router-dom";
 
 function Login() {
   const [loginDetails, setLoginDetails] = useState({
@@ -80,6 +81,9 @@ function Login() {
           error={error}
           onSubmit={onLogin}
         />
+        <p>
+          Don't have an account? <Link to="/register">Register</Link>!
+        </p>
       </main>
     </>
   );

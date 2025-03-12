@@ -4,6 +4,7 @@ import { AuthProvider } from "./context/AuthProvider";
 
 import App from "./components/App/App";
 import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 
 const routes: RouteObject[] = [
   {
@@ -15,10 +16,18 @@ const routes: RouteObject[] = [
     ),
   },
   {
-    path: "/login",
+    path: "login",
     element: (
       <AuthProvider>
         <Login />
+      </AuthProvider>
+    ),
+  },
+  {
+    path: "register",
+    element: (
+      <AuthProvider>
+        <Register />
       </AuthProvider>
     ),
   },
