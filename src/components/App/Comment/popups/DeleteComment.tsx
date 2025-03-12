@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useState } from "react";
 
 import { useAuth } from "../../../../context/AuthProvider";
-import { usePostContext } from "../../../../../../context/PostContextProvider";
+import { usePostContext } from "../../../../context/PostContextProvider";
 import { Dialog } from "../../../../context/DialogProvider";
 
 import DialogTrigger from "../../../Dialog/DialogTrigger";
@@ -16,12 +16,10 @@ import styles from "./popups.module.css";
 
 type DeleteCommentProps = {
   id: number;
-  updatePosts: () => void;
-  setError: Dispatch<SetStateAction<string>>;
 };
 
 function DeleteComment({ id, updatePosts, setError }: DeleteCommentProps) {
-    const { loading, setLoading } =
+    const { loading, setLoading, setError, updatePosts } =
     usePostContext();
 
   const { user } = useAuth();
