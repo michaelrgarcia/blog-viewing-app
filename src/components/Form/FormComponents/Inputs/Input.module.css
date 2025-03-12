@@ -1,0 +1,4 @@
+.inputFormRow {
+  display: flex;
+  flex-direction: column;
+}
